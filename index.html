@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.io app</title>
+  </head>
+  <style>
+    body {
+    font-size:12px;
+    font-family: "Arial";      
+    }
+  </style>
+  <body>
+    <h1>Socket.io</h1>
+    <!-- <h3>X: <span id='x'></span></h3>
+    <h3>Y: <span id='y'></span></h3>
+    <h3>Z: <span id='z'></span></h3> -->
+    <button>Toggle</button><span id='toggle'>On</span>
+    <div id='messages'></div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    var socket = io();  
+    var listenEnabled = true;
+
+    socket.on('data', function(data){
+      if (listenEnabled){
+        var output = 'Y: ' + data.y + ' Pos: ' + data.phoneHeight;
+        $('#messages').append($('<div>').text(output));
+      }
+    });
+    if (window.DeviceMotionEvent) {
+      window.addEventListener("devicemotion", function(e){        
+      });
+    }
+    $('button').on('click', function(){
+      if (listenEnabled){
+        listenEnabled = false;
+        $('#toggle').text('Off');
+      } else {
+        listenEnabled = true;
+        $('#messages').empty();
+        $('#toggle').text('On');
+      }
+    })
+
+  </script>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.io Client</title>
+  </head>
+  <body>
+    <h1>Client</h1>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();  
+    if (window.DeviceMotionEvent) {
+      window.addEventListener("devicemotion", function(e){
+        socket.emit('data',e);
+      });
+    }
+
+  </script>
+</html>
